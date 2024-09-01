@@ -1,0 +1,57 @@
+Prefixes: {
+	Vital: {
+		DisplayName: Vital
+		Tooltip: +20 health
+	}
+
+	Sneaky: {
+		DisplayName: Sneaky
+		Tooltip: Slightly decreased aggro
+	}
+
+	Brave: {
+		DisplayName: Brave
+		Tooltip: Slightly increased aggro
+	}
+
+	Masterful: {
+		DisplayName: Masterful
+		Tooltip: +4% melee size
+	}
+
+	Peaceful: {
+		DisplayName: Peaceful
+		Tooltip: -4% enemy spawn rate
+	}
+
+	Agile: {
+		DisplayName: Agile
+		Tooltip: +7.3% jump speed
+	}
+
+	Healthy: {
+		DisplayName: Healthy
+		Tooltip: +3% buff duration
+	}
+
+	Resilient: {
+		DisplayName: Resilient
+		Tooltip: -3% debuff duraction
+	}
+
+	Patient: {
+		DisplayName: Patient
+		Tooltip: Slightly extends underwater breathing
+	}
+
+	Warding: {
+		DisplayName: Warding
+		Tooltip: +3% damage reduction
+	}
+
+	Quick.Tooltip:
+		'''
+		+3% movement speed
+		+3% acceleration
+		'''
+}
