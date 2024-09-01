@@ -12,11 +12,17 @@ namespace AccessoryPrefixesPlus.Content.PrefixPlayer
         public float size = 0f;
         public float spawnrate = 1f;
         public float power = 0f;
+        public int breathTime = 0;
+        public int breathCD = 0;
+        public int prevBreathTime = 0;
+        public int prevBreathCD = 0;
         public override void PostUpdateEquips()
         {
             size = 0f;
             spawnrate = 1f;
             power = 0f;
+            breathTime = 0;
+            breathCD = 0;
             foreach (var item in Player.armor)
             {
                 if (item.social)
@@ -31,11 +37,17 @@ namespace AccessoryPrefixesPlus.Content.PrefixPlayer
                 {
                     spawnrate += 0.04f;
                 }
+                if (item.prefix == ModContent.PrefixType<Patient>())
+                {
+                    breathTime += 20;
+                }
                 if (item.prefix == ModContent.PrefixType<Royal>())
                 {
                     power = power == 0 ? 0.1f : power * 1.5f;
                 }
             }
+            Player.breathMax += breathTime - prevBreathTime;
+            prevBreathTime = breathTime;
             var color = ModContent.GetInstance<TheConfig>().RoyalLightColor;
             Lighting.AddLight(Player.Center, color.R / 100 * power, color.G / 100 * power, color.B / 100 * power);
         }

@@ -32,12 +32,6 @@ namespace AccessoryPrefixesPlus.Content.UniquePrefixes
             valueMult *= 1.2f;
         }
 
-        public override void ApplyAccessoryEffects(Player player)
-        {
-            player.breathMax += 600;
-            player.breathCD += 600;
-        }
-
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
             var tooltip = new TooltipLine(Mod, "PrefixAccBreath", Language.GetTextValue("Mods.AccessoryPrefixesPlus.Prefixes.Patient.Tooltip"));
