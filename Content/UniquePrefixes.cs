@@ -3,9 +3,26 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria;
 using Terraria.ID;
+using System.Diagnostics;
 
 namespace AccessoryPrefixesPlus.Content.UniquePrefixes
 {
+    public class Royal : ModPrefix
+    {
+        public override PrefixCategory Category => PrefixCategory.Accessory;
+
+        public override void ModifyValue(ref float valueMult)
+        {
+            valueMult *= 1.2f;
+        }
+
+        public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
+        {
+            var tooltip = new TooltipLine(Mod, "PrefixAccBreath", Language.GetTextValue("Mods.AccessoryPrefixesPlus.Prefixes.Royal.Tooltip"));
+            tooltip.IsModifier = true; // because it better be compatible
+            yield return tooltip;
+        }
+    }
     public class Patient : ModPrefix
     {
         public override PrefixCategory Category => PrefixCategory.Accessory;
@@ -39,7 +56,7 @@ namespace AccessoryPrefixesPlus.Content.UniquePrefixes
 
         public override void ApplyAccessoryEffects(Player player)
         {
-            ModContent.GetInstance<BuffDetour>().HealthyTime += 0.03f;
+            player.GetModPlayer<BuffDetour>().HealthyTime += 0.05f;
         }
 
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
@@ -59,7 +76,7 @@ namespace AccessoryPrefixesPlus.Content.UniquePrefixes
         }
         public override void ApplyAccessoryEffects(Player player)
         {
-            ModContent.GetInstance<BuffDetour>().ResilientTime -= 0.03f;
+            player.GetModPlayer<BuffDetour>().HealthyTime -= 0.05f;
         }
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
@@ -94,7 +111,12 @@ namespace AccessoryPrefixesPlus.Content.UniquePrefixes
             {
                 mult = self.GetModPlayer<BuffDetour>().ResilientTime;
             }
-            return (int)mult * buffTime;
+            return (int)(mult * buffTime);
+        }
+        public override void ResetEffects()
+        {
+            HealthyTime = 1f;
+            ResilientTime = 1f;
         }
     }
 }

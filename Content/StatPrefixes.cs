@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using XPT.Core.Audio.MP3Sharp.Decoding.Decoders.LayerIII;
 
 namespace AccessoryPrefixesPlus.Content.StatPrefixes
 {

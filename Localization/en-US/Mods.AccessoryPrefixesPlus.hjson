@@ -31,17 +31,22 @@ Prefixes: {
 
 	Healthy: {
 		DisplayName: Healthy
-		Tooltip: +3% buff duration
+		Tooltip: +5% buff duration
 	}
 
 	Resilient: {
 		DisplayName: Resilient
-		Tooltip: -3% debuff duraction
+		Tooltip: -5% debuff duraction
 	}
 
 	Patient: {
 		DisplayName: Patient
 		Tooltip: Slightly extends underwater breathing
+	}
+
+	Royal: {
+		DisplayName: Royal
+		Tooltip: You emit faint light
 	}
 
 	Warding: {
@@ -54,4 +59,16 @@ Prefixes: {
 		+3% movement speed
 		+3% acceleration
 		'''
+}
+
+Configs: {
+	TheConfig: {
+		DisplayName: The Config
+		Headers.Config: Config Header
+
+		RoyalLightColor: {
+			Label: Royal Light Color
+			Tooltip: ""
+		}
+	}
 }
