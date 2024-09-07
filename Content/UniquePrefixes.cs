@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using Terraria.Localization;
-using Terraria.ModLoader;
+using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.ID;
-using System.Diagnostics;
+using Terraria.ModLoader;
+using System.Collections.Generic;
+using Terraria.Localization;
 
 namespace AccessoryPrefixesPlus.Content.UniquePrefixes
 {
@@ -11,6 +11,10 @@ namespace AccessoryPrefixesPlus.Content.UniquePrefixes
     {
         public override PrefixCategory Category => PrefixCategory.Accessory;
 
+        public override void ApplyAccessoryEffects(Player player)
+        {
+            player.GetModPlayer<PrefixPlayer.AccessoryPrefixPlayer>().power = player.GetModPlayer<PrefixPlayer.AccessoryPrefixPlayer>().power == 0 ? 0.1f : player.GetModPlayer<PrefixPlayer.AccessoryPrefixPlayer>().power * 1.5f;
+        }
         public override void ModifyValue(ref float valueMult)
         {
             valueMult *= 1.2f;
@@ -31,7 +35,10 @@ namespace AccessoryPrefixesPlus.Content.UniquePrefixes
         {
             valueMult *= 1.2f;
         }
-
+        public override void ApplyAccessoryEffects(Player player)
+        {
+            player.GetModPlayer<PrefixPlayer.AccessoryPrefixPlayer>().breathTime += 20;
+        }
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
             var tooltip = new TooltipLine(Mod, "PrefixAccBreath", Language.GetTextValue("Mods.AccessoryPrefixesPlus.Prefixes.Patient.Tooltip"));
@@ -111,6 +118,31 @@ namespace AccessoryPrefixesPlus.Content.UniquePrefixes
         {
             HealthyTime = 1f;
             ResilientTime = 1f;
+        }
+    }
+    public class BuffTimeItem : GlobalItem
+    {
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            int index = tooltips.FindIndex(line => line.Name == "BuffTime");
+            if (index >= 0)
+            {
+                var line = tooltips[index].Text;
+                Regex number = new Regex(@"\d+");
+                var num = number.Match(line).Value;
+                if (int.TryParse(num, out int Num))
+                {
+                    int ind = line.IndexOf(num);
+                    Num = (int)(60 * Num * Main.LocalPlayer.GetModPlayer<BuffDetour>().HealthyTime);
+                    var sec = Num % 60;
+                    Num -= sec;
+                    Num /= 60;
+                    ind += 2;
+                    tooltips[index].Text = $"{line.Remove(ind - 2)}{Num}{line[ind..]}";
+                    var toInsert = tooltips[index].Text.LastIndexOf(' ');
+                    tooltips[index].Text = sec != 0 ? tooltips[index].Text.Insert(toInsert, $" {sec} {Language.GetTextValue("Mods.AccessoryPrefixesPlus.Other.seconds")}") : tooltips[index].Text;
+                }
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ Prefixes: {
 
 	Peaceful: {
 		DisplayName: Peaceful
-		Tooltip: -4% enemy spawn rate
+		Tooltip: -5% enemy spawn rate
 	}
 
 	Agile: {
@@ -63,12 +63,14 @@ Prefixes: {
 
 Configs: {
 	TheConfig: {
-		DisplayName: The Config
-		Headers.Config: Config Header
+		DisplayName: Config
+		Headers.Config: Configs for modifiers
 
 		RoyalLightColor: {
 			Label: Royal Light Color
-			Tooltip: ""
+			Tooltip: The color of light spawned by the Royal modifier
 		}
 	}
 }
+
+Other.seconds: seconds

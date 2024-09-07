@@ -89,6 +89,10 @@ namespace AccessoryPrefixesPlus.Content.StatPrefixes
         {
             valueMult *= 1.3f;
         }
+        public override void ApplyAccessoryEffects(Player player)
+        {
+            player.GetModPlayer<PrefixPlayer.AccessoryPrefixPlayer>().size += 0.4f;
+        }
 
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
@@ -112,6 +116,10 @@ namespace AccessoryPrefixesPlus.Content.StatPrefixes
             valueMult *= 1.12f;
         }
 
+        public override void ApplyAccessoryEffects(Player player)
+        {
+            player.GetModPlayer<PrefixPlayer.AccessoryPrefixPlayer>().spawnrate += 0.05f;
+        }
         public override IEnumerable<TooltipLine> GetTooltipLines(Item item)
         {
             var tooltip = new TooltipLine(Mod, "PrefixAccPeace", Language.GetTextValue("Mods.AccessoryPrefixesPlus.Prefixes.Peaceful.Tooltip"));

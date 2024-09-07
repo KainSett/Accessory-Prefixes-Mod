@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using AccessoryPrefixesPlus.Content.UniquePrefixes;
 using AccessoryPrefixesPlus.Common.Configs;
+using System.Linq;
 
 namespace AccessoryPrefixesPlus.Content.PrefixPlayer
 {
@@ -16,40 +17,12 @@ namespace AccessoryPrefixesPlus.Content.PrefixPlayer
         public int breathCD = 0;
         public int prevBreathTime = 0;
         public int prevBreathCD = 0;
-        public override void PostUpdateEquips()
+        public override void UpdateEquips()
         {
-            size = 0f;
-            spawnrate = 1f;
-            power = 0f;
-            breathTime = 0;
-            breathCD = 0;
-            foreach (var item in Player.armor)
-            {
-                if (item.social)
-                {
-                    continue;
-                }
-                if (item.prefix == ModContent.PrefixType<Masterful>())
-                {
-                    size += 0.04f;
-                }
-                if (item.prefix == ModContent.PrefixType<Peaceful>())
-                {
-                    spawnrate += 0.04f;
-                }
-                if (item.prefix == ModContent.PrefixType<Patient>())
-                {
-                    breathTime += 20;
-                }
-                if (item.prefix == ModContent.PrefixType<Royal>())
-                {
-                    power = power == 0 ? 0.1f : power * 1.5f;
-                }
-            }
             Player.breathMax += breathTime - prevBreathTime;
             prevBreathTime = breathTime;
             var color = ModContent.GetInstance<TheConfig>().RoyalLightColor;
-            Lighting.AddLight(Player.Center, color.R / 100 * power, color.G / 100 * power, color.B / 100 * power);
+            if (power != 0f) { Lighting.AddLight(Player.Center, color.R / 100 * power, color.G / 100 * power, color.B / 100 * power); }
         }
         public override void ModifyItemScale(Item item, ref float scale)
         {
@@ -57,6 +30,14 @@ namespace AccessoryPrefixesPlus.Content.PrefixPlayer
             {
                 scale += size;
             }
+        }
+        public override void ResetEffects()
+        {
+            size = 0f;
+            spawnrate = 1f;
+            power = 0f;
+            breathTime = 0;
+            breathCD = 0;
         }
     }
 
